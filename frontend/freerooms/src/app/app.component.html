@@ -6,11 +6,19 @@
       <span class="title">Freerooms</span>
     </div>
     <div class="nav-icons">
-      <span class="material-icons">search</span>
-      <span class="material-icons selected">grid_view</span>
-      <span class="material-icons">map</span>
-      <span class="material-icons">dark_mode</span>
-    </div>
+      <span class="material-icons" [class.selected]="selectedView === 'search'" (click)="selectView('search')">
+        search
+      </span>
+      <span class="material-icons" [class.selected]="selectedView === 'grid_view'" (click)="selectView('grid_view')">
+        grid_view
+      </span>
+      <span class="material-icons" [class.selected]="selectedView === 'map'" (click)="selectView('map')">
+        map
+      </span>
+      <span class="material-icons" [class.selected]="selectedView === 'dark_mode'" (click)="selectView('dark_mode')">
+        dark_mode
+      </span>
+    </div>    
   </nav>
 
   <!-- Filters and Sorting -->
@@ -29,6 +37,7 @@
     <div *ngFor="let building of filteredBuildings" class="building-card">
       <img [src]="'assets/' + building.image" [alt]="building.name" class="building-img" />
       <span class="availability">{{ building.rooms }} rooms available</span>
+      <span class="availability-small">{{ building.rooms }}/{{ building.rooms }}</span>
       <div class="building-name">{{ building.name }}</div>
     </div>
   </div>

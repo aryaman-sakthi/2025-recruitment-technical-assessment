@@ -12,7 +12,8 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   title = 'freerooms';
   isDoorOpen = false;
-  searchQuery: string = ''; // Bind this to the input field
+  searchQuery: string = '';
+  selectedView = '';
 
   buildings = [
     { name: 'AGSM', rooms: 9, image: 'agsm.webp' },
@@ -37,9 +38,20 @@ export class AppComponent {
     );
   }
 
+  // Open and close the door logo
   toggleDoor() {
     this.isDoorOpen = !this.isDoorOpen;
     const logo = document.querySelector('.logo') as HTMLImageElement;
     logo.src = this.isDoorOpen ? 'assets/freeRoomsLogo.png' : 'assets/freeroomsDoorClosed.png';
   }
+
+  // Button toggle 
+  selectView(view: string) {
+    if (this.selectedView === view) {
+      this.selectedView = ''; // Deselect if clicked again
+    } else {
+      this.selectedView = view;
+    }
+  }
+  
 }

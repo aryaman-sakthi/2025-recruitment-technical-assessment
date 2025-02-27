@@ -83,10 +83,24 @@ html, body {
   /* Controls */
   .controls {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 20px 0;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+
   }
+
+    /* Search Bar Styling */
+  .search-bar {
+    flex-grow: 1; /* Allows it to expand in normal view */
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    min-width: 200px;
+  }
+
   
   .filter-btn,
   .sort-btn {
@@ -99,6 +113,7 @@ html, body {
     font-family: Atkinson Hyperlegible Mono;
     font-weight: bold;
     font-size: 0.9rem;
+    white-space: nowrap;
   }
   
   .material-icons.btn {
@@ -126,13 +141,16 @@ html, body {
 .buildings-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    height: 700px;
+    grid-auto-rows: minmax(250px, auto); /* Ensures each row gets a good height */
+    height: 85vh;
     gap: 20px;
     padding: 20px;
 }
 
 /* Building Card */
 .building-card {
+    max-width: 400px;
+    max-height: 600px;
     background-color: white;
     border-radius: 12px;
     overflow: hidden;
@@ -158,7 +176,8 @@ html, body {
 }
 
 /* Availability Badge */
-.availability {
+.availability,
+.availability-small{
     position: absolute;
     top: 10px;
     right: 10px;
@@ -174,7 +193,12 @@ html, body {
     gap: 5px;
 }
 
-.availability::before {
+.availability-small {
+    display: none; /* Hidden by default */
+}
+
+.availability::before,
+.availability-small::before {
     content: "●";
     color: green;
     font-size: 12px;
@@ -196,4 +220,73 @@ html, body {
     padding-block: 15px;
 }
 
-  
+/* Responsive: Change to Vertical List on Small Screens */
+@media (max-width: 700px) {
+    .title {
+        font-size: 0;
+    }
+
+    .controls {
+        align-items: stretch;
+    }
+
+    .search-bar {
+        width: 90%; /* Takes almost full width */
+        order: -1;
+    }
+
+    .filter-btn, .sort-btn {
+        display: inline-block;
+        text-align: center;
+    }
+
+    .buildings-grid {
+        display: flex;
+        flex-direction: column;
+        height: 120%;
+    }
+
+    .building-card {
+        max-width: 100vw;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .image-container {
+        flex: 0 0 40%;
+    }
+
+    .building-img {
+        width: 100%;
+        height: 100px;
+        object-fit: cover;
+        filter: brightness(0.7)
+    }
+
+    .building-name {
+        top: 40%;
+        left: 5px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 3px 8px;
+        background: none;
+    }
+
+    .building-info {
+        flex: 1;
+    }
+
+    .availability {
+        display: none; /* Hide the large version */
+    }
+
+    .availability-small {
+        display: inline-block; /* Show the small version */
+        top: 35%;
+        padding: 12px;
+        padding-inline: 18px;
+        border-radius: 16px;
+    }
+}
